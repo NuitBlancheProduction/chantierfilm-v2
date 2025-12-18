@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Couleurs Chantier Film */
+    --color-white: #FCFCFC;
+    --color-dark: #212125;
+    --color-blue-dark: #4E6D88;
+    --color-blue-primary: #0055FF;
+    --color-blue-light: #A5B3C5;
+    --color-blue-lightest: #E0E8F4;
+    --animation-duration: 0.8s;
+    
+    /* shadcn/ui variables */
+    --background: 0 0% 99%;
+    --foreground: 240 5% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 5% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 5% 13%;
+    --primary: 221 100% 50%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 218 44% 91%;
+    --secondary-foreground: 240 5% 13%;
+    --muted: 218 44% 91%;
+    --muted-foreground: 211 21% 55%;
+    --accent: 218 44% 91%;
+    --accent-foreground: 221 100% 50%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 99%;
+    --border: 210 17% 71%;
+    --input: 210 17% 71%;
+    --ring: 221 100% 50%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 5% 13%;
+    --foreground: 0 0% 99%;
+    --card: 240 4% 16%;
+    --card-foreground: 0 0% 99%;
+    --popover: 240 4% 16%;
+    --popover-foreground: 0 0% 99%;
+    --primary: 221 100% 50%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 211 21% 35%;
+    --secondary-foreground: 0 0% 99%;
+    --muted: 211 21% 35%;
+    --muted-foreground: 210 17% 71%;
+    --accent: 211 21% 35%;
+    --accent-foreground: 0 0% 99%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 99%;
+    --border: 211 21% 35%;
+    --input: 211 21% 35%;
+    --ring: 221 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-cf-white text-cf-dark;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Animations personnalisées Chantier Film */
+  .animate-element {
+    opacity: 0;
+    animation: fadeInUp var(--animation-duration) forwards;
+  }
+
+  .animate-feature {
+    opacity: 0;
+    animation: fadeInRight var(--animation-duration) forwards;
+  }
+
+  .animate-image {
+    opacity: 0;
+    animation: fadeInUp var(--animation-duration) forwards 0.3s;
+  }
+
+  .animate-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Pulse animation pour les CTA */
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 85, 255, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 85, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 85, 255, 0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
+
+/* Import Google Fonts - Nunito */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
