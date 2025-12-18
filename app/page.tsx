@@ -131,7 +131,7 @@ export default function HomePage() {
 
               {/* Floating Icons */}
               <div className="hidden lg:block absolute -top-5 right-[20%] bg-cf-blue-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-float">
-                <Drone className="w-6 h-6" />
+                <Aperture className="w-6 h-6" />
               </div>
               <div className="hidden lg:block absolute bottom-8 left-[10%] bg-cf-blue-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-float [animation-delay:1s]">
                 <Video className="w-6 h-6" />
