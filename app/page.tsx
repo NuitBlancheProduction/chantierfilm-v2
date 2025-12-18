@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { CheckCircle, Drone, Video } from 'lucide-react';
+import { CheckCircle, Aperture, Video } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ProblemsSection from '@/components/sections/ProblemsSection';
