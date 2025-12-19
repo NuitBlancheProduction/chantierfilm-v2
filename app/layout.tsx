@@ -1,62 +1,79 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-nunito",
-});
+const inter = Inter({ subsets: ['latin'] });
 
-const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : "https://www.chantierfilm.com";
+// URL de base sécurisée pour le SEO - toujours pointer vers le domaine de production
+const baseUrl = 'https://www.nuitblancheproduction.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Chantier Film - Immortalisez Votre Chantier en Vidéo",
+  applicationName: 'Nuit Blanche Production',
+  title: {
+    template: '%s | Nuit Blanche Production',
+    default: 'Nuit Blanche Production | Agence Vidéo & Drone Technique - Vosges',
+  },
   description:
-    "Capturation professionnelle de chantiers avec drone et timelapse. Documentation complète et suivi en temps réel.",
+    'Agence de production vidéo globale à Golbey : Corporate, Publicité, Événementiel. Expertise drone technique : Photogrammétrie, Cartographie, Inspection. Filiale BTP Chantier Film.',
   keywords: [
-    "chantier film",
-    "vidéo chantier",
-    "timelapse chantier",
-    "drone chantier",
-    "documentation chantier",
-    "suivi chantier",
-    "reportage chantier",
-    "captation chantier",
-    "photogrammétrie",
-    "inspection drone",
+    'production vidéo vosges',
+    'agence audiovisuelle epinal',
+    'film corporate vosges',
+    'publicité vidéo lorraine',
+    'captation événementielle',
+    'drone technique',
+    'photogrammétrie drone',
+    'cartographie aérienne',
+    'inspection par drone',
+    'film institutionnel grand-est',
+    'vidéo entreprise nancy',
+    'production audiovisuelle golbey',
+    'agence vidéo professionnelle',
   ],
+  alternates: {
+    canonical: '/',
+  },
   icons: {
-    icon: [{ url: "/asset/icon.webp" }],
+    icon: [
+      { url: '/favicons/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
+  manifest: '/favicons/site.webmanifest',
+  appleWebApp: {
+    title: 'Nuit Blanche Production',
   },
   openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: "Chantier Film",
-    title: "Chantier Film - Immortalisez Votre Chantier en Vidéo",
+    type: 'website',
+    locale: 'fr_FR',
+    siteName: 'Nuit Blanche Production',
+    title: 'Nuit Blanche Production | Agence Vidéo & Drone Technique - Vosges',
     description:
-      "Capturation professionnelle de chantiers avec drone et timelapse. Documentation complète et suivi en temps réel.",
+      'Production vidéo globale : Corporate, Publicité, Événementiel. Expertise drone technique : Photogrammétrie, Cartographie et Inspection. Basés à Golbey.',
     images: [
       {
-        url: `${baseUrl}/asset/01.webp`,
+        url: 'https://www.nuitblancheproduction.com/nuit-blanche-production-video-drone-vosges-social-card.jpg?v=2',
         width: 1200,
         height: 630,
-        alt: "Chantier Film - Documentation professionnelle de chantiers",
+        alt: 'Nuit Blanche Production - Agence Vidéo & Drone Technique Vosges',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Chantier Film - Immortalisez Votre Chantier en Vidéo",
+    card: 'summary_large_image',
+    title: 'Nuit Blanche Production | Agence Vidéo & Drone Technique',
     description:
-      "Capturation professionnelle de chantiers avec drone et timelapse. Documentation complète et suivi en temps réel.",
-    images: [`${baseUrl}/asset/01.webp`],
+      'Production vidéo globale : Corporate, Pub, Événementiel. Expertise drone technique : Photogrammétrie, Cartographie & Inspection.',
+    images: ['https://www.nuitblancheproduction.com/nuit-blanche-production-video-drone-vosges-social-card.jpg?v=2'],
   },
   robots: {
     index: true,
@@ -64,55 +81,162 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
 };
 
+// Schema.org JSON-LD pour le SEO
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      "@type": "VideoProductionService",
-      "@id": `${baseUrl}/#organization`,
-      name: "Chantier Film",
-      description:
-        "Capturation professionnelle de chantiers avec drone et timelapse. Documentation complète et suivi en temps réel.",
+      '@type': 'Organization',
+      '@id': `${baseUrl}/#organization`,
+      name: 'Nuit Blanche Production',
+      alternateName: 'NBP',
       url: baseUrl,
-      logo: `${baseUrl}/asset/title.webp`,
-      priceRange: "$$-$$$",
-      areaServed: {
-        "@type": "Country",
-        name: "France",
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logo.png`,
       },
-      serviceType: [
-        "Reportage Chantier",
-        "Timelapse Professionnel",
-        "Vue Drone",
-        "Documentation Chantier",
-        "Suivi Temps Réel",
+      image: `${baseUrl}/nuit-blanche-production-video-drone-vosges-social-card.jpg`,
+      description:
+        'Agence de production vidéo professionnelle spécialisée en vidéo corporate, publicité, événementiel et services drone techniques : photogrammétrie, cartographie et inspection.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '39 rue Jean Mermoz',
+        addressLocality: 'Golbey',
+        postalCode: '88190',
+        addressRegion: 'Vosges',
+        addressCountry: 'FR',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 48.20110400744197,
+        longitude: 6.435260076219138,
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+33-6-51-30-13-83',
+        contactType: 'customer service',
+        areaServed: 'FR',
+        availableLanguage: 'French',
+      },
+      sameAs: [
+        'https://www.instagram.com/nuitblancheproduction',
+        'https://www.linkedin.com/company/50366441/',
       ],
     },
     {
-      "@type": "LocalBusiness",
-      "@id": `${baseUrl}/#localbusiness`,
-      name: "Chantier Film",
-      description:
-        "Service de captation vidéo et photo de chantiers avec drones et timelapse.",
+      '@type': 'WebSite',
+      '@id': `${baseUrl}/#website`,
       url: baseUrl,
-      telephone: "+33-6-51-30-18-93",
-      email: "contact@chantierfilm.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "39 rue Jean Mermoz",
-        addressLocality: "Golbey",
-        postalCode: "88190",
-        addressCountry: "FR",
+      name: 'Nuit Blanche Production',
+      description:
+        'Site officiel de Nuit Blanche Production, agence de production vidéo et services drone techniques dans les Vosges.',
+      publisher: {
+        '@id': `${baseUrl}/#organization`,
       },
-      priceRange: "$$-$$$",
-      sameAs: ["https://www.linkedin.com/company/chantier-film"],
+      inLanguage: 'fr-FR',
+    },
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${baseUrl}/#localbusiness`,
+      name: 'Nuit Blanche Production',
+      description:
+        'Agence de production audiovisuelle basée à Golbey, spécialisée en vidéo entreprise et services drone techniques.',
+      url: baseUrl,
+      telephone: '+33-6-51-30-13-83',
+      priceRange: '$$-$$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '39 rue Jean Mermoz',
+        addressLocality: 'Golbey',
+        postalCode: '88190',
+        addressRegion: 'Vosges',
+        addressCountry: 'FR',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 48.20110400744197,
+        longitude: 6.435260076219138,
+      },
+      image: `${baseUrl}/nuit-blanche-production-video-drone-vosges-social-card.jpg`,
+      areaServed: [
+        {
+          '@type': 'State',
+          name: 'Grand Est',
+        },
+        {
+          '@type': 'City',
+          name: 'Épinal',
+        },
+        {
+          '@type': 'City',
+          name: 'Nancy',
+        },
+        {
+          '@type': 'City',
+          name: 'Golbey',
+        },
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Services de Production Vidéo et Drone',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Vidéo Corporate',
+              description: 'Production de films institutionnels et vidéos d\'entreprise',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Film Publicitaire',
+              description: 'Création de contenus publicitaires vidéo',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Captation Événementielle',
+              description: 'Couverture vidéo d\'événements professionnels',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Photogrammétrie par Drone',
+              description: 'Relevés 3D et modélisation par drone',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Cartographie Aérienne',
+              description: 'Cartographie et relevés topographiques par drone',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Inspection Technique',
+              description: 'Inspection par drone de structures et infrastructures',
+            },
+          },
+        ],
+      },
     },
   ],
 };
@@ -130,9 +254,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${nunito.variable} font-sans antialiased`}>
+      <body className={inter.className}>
+        <GoogleAnalytics GA_MEASUREMENT_ID="G-Q9ECMN6Q9J" />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
