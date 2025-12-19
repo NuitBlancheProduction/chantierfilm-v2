@@ -13,11 +13,8 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverActions: {
-      enabled: true,
-    },
-  },
+  // Pour Next.js 14+, serverActions est activé par défaut
+  // Pas besoin de configuration experimental
 };
 
 module.exports = nextConfig;
