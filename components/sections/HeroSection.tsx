@@ -109,7 +109,7 @@ export function HeroSection() {
               className="hidden lg:block mb-6"
             >
               <Link
-                href="/prise-de-rendez-vous/"
+                href="/rendez-vous/"
                 className="group relative inline-flex items-center justify-center gap-3 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold text-lg px-8 py-4 rounded-lg shadow-industrial-lg transition-all duration-300 hover:shadow-xl overflow-hidden"
               >
                 {/* Effet Shimmer */}
@@ -205,7 +205,7 @@ export function HeroSection() {
           >
             {/* CTA Button Mobile */}
             <Link
-              href="/prise-de-rendez-vous/"
+              href="/rendez-vous/"
               className="group relative flex items-center justify-center gap-3 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold text-lg px-8 py-4 rounded-lg shadow-industrial-lg transition-all duration-300 hover:shadow-xl overflow-hidden"
             >
               {/* Effet Shimmer */}

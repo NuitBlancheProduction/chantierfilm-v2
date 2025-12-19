@@ -83,7 +83,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/prise-de-rendez-vous/"
+                  href="/rendez-vous/"
                   className="hover:text-chantier-yellow transition-colors inline-block"
                 >
                   Planifier un rendez-vous
