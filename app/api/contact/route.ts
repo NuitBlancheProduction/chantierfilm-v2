@@ -1,36 +1,27 @@
-'use server';
-
+import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import ContactEmail from '@/components/emails/ContactTemplate';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-interface EmailResponse {
-  success: boolean;
-  error?: string;
-}
-
-export async function sendEmail(formData: FormData): Promise<EmailResponse> {
+export async function POST(request: Request) {
   try {
-    // Extract and validate form data
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const description = formData.get('description') as string;
+    const body = await request.json();
+    const { name, email, phone, description } = body;
 
     // Validation
     if (!name || name.trim().length === 0) {
-      return {
-        success: false,
-        error: 'Le nom est requis',
-      };
+      return NextResponse.json(
+        { success: false, error: 'Le nom est requis' },
+        { status: 400 }
+      );
     }
 
     if (!email || !isValidEmail(email)) {
-      return {
-        success: false,
-        error: 'Un email valide est requis',
-      };
+      return NextResponse.json(
+        { success: false, error: 'Un email valide est requis' },
+        { status: 400 }
+      );
     }
 
     // Send email using Resend
@@ -49,24 +40,23 @@ export async function sendEmail(formData: FormData): Promise<EmailResponse> {
 
     if (error) {
       console.error('Resend error:', error);
-      return {
-        success: false,
-        error: 'Erreur lors de l\'envoi du message. Veuillez réessayer.',
-      };
+      return NextResponse.json(
+        { success: false, error: 'Erreur lors de l\'envoi du message' },
+        { status: 500 }
+      );
     }
 
     console.log('Email sent successfully:', data);
-    return { success: true };
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Unexpected error in sendEmail:', error);
-    return {
-      success: false,
-      error: 'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.',
-    };
+    console.error('Unexpected error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Une erreur inattendue s\'est produite' },
+      { status: 500 }
+    );
   }
 }
 
-// Email validation helper
 function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

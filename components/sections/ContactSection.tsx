@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CalendarCheck, Mail, Phone, FileText, ShieldCheck, Lock, CheckCircle } from 'lucide-react';
-import { sendEmail } from '@/actions/send-email';
+import { CalendarCheck, FileText, Lock, CheckCircle } from 'lucide-react';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -20,7 +19,6 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Client-side validation
     if (!formData.name || !formData.email) {
       setSubmitStatus({
         type: 'error',
@@ -33,13 +31,15 @@ export function ContactSection() {
     setSubmitStatus({ type: null, message: '' });
 
     try {
-      const data = new FormData();
-      data.append('name', formData.name);
-      data.append('email', formData.email);
-      data.append('phone', formData.phone);
-      data.append('description', formData.description);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      const result = await sendEmail(data);
+      const result = await response.json();
 
       if (result.success) {
         setSubmitStatus({
@@ -69,7 +69,6 @@ export function ContactSection() {
       ...prev,
       [e.target.name]: e.target.value
     }));
-    // Clear error message on input change
     if (submitStatus.type === 'error') {
       setSubmitStatus({ type: null, message: '' });
     }
@@ -77,7 +76,6 @@ export function ContactSection() {
 
   return (
     <section className="relative bg-gray-50 py-20 lg:py-32 overflow-hidden">
-      {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-20 right-10 w-72 h-72 bg-chantier-yellow opacity-5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-chantier-concrete opacity-5 rounded-full blur-3xl"></div>
@@ -85,7 +83,6 @@ export function ContactSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Column - L'accroche */}
           <div className="space-y-8">
             <div className="space-y-6">
               <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
@@ -102,7 +99,6 @@ export function ContactSection() {
               </p>
             </div>
 
-            {/* CTA Button - Prise de Rendez-vous */}
             <div className="space-y-4">
               <a 
                 href="/prise-de-rendez-vous"
@@ -117,14 +113,12 @@ export function ContactSection() {
               </p>
             </div>
 
-            {/* Divider with icon */}
             <div className="flex items-center gap-4 my-8">
               <div className="flex-1 h-px bg-chantier-light-grey"></div>
               <div className="w-2 h-2 rounded-full bg-chantier-yellow"></div>
               <div className="flex-1 h-px bg-chantier-light-grey"></div>
             </div>
 
-            {/* Additional content */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-chantier-asphalt">
                 Échangez avec Nos Experts
@@ -135,10 +129,8 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Right Column - Formulaire */}
           <div className="lg:sticky lg:top-24">
             <div className="bg-white rounded-2xl shadow-2xl p-8 lg:p-10 border border-chantier-light-grey">
-              {/* Form Header */}
               <div className="text-center mb-8">
                 <h3 className="text-2xl lg:text-3xl font-bold text-chantier-asphalt mb-2">
                   Prêt à Immortaliser Votre Chantier?
@@ -148,7 +140,6 @@ export function ContactSection() {
                 </p>
               </div>
 
-              {/* Status Messages */}
               {submitStatus.type && (
                 <div
                   className={`mb-6 p-4 rounded-lg border ${
@@ -161,9 +152,7 @@ export function ContactSection() {
                 </div>
               )}
 
-              {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name & Email Row */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <input
@@ -191,7 +180,6 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div>
                   <input
                     type="tel"
@@ -204,7 +192,6 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Description */}
                 <div>
                   <textarea
                     name="description"
@@ -217,14 +204,12 @@ export function ContactSection() {
                   ></textarea>
                 </div>
 
-                {/* Additional Info */}
                 <div className="bg-gray-50 rounded-lg p-4 border border-chantier-light-grey">
                   <p className="text-sm text-chantier-steel leading-relaxed">
                     Notre équipe s'engage à vous répondre sous 48h ouvrées. Chaque demande est traitée avec soin pour vous proposer une solution parfaitement adaptée à votre projet. N'hésitez pas à détailler vos attentes pour une proposition plus précise.
                   </p>
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -256,7 +241,6 @@ export function ContactSection() {
                 </button>
               </form>
 
-              {/* Trust Badges */}
               <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-chantier-light-grey">
                 <div className="text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-chantier-yellow bg-opacity-10 rounded-full mb-2">
