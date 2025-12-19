@@ -1,134 +1,139 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { CheckCircle, Aperture, Video } from 'lucide-react';
+import { useState } from 'react';
+import { BookingButton } from '@/components/ui/BookingButton';
 
-export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+export function HeroSection() {
+  const [videoError, setVideoError] = useState(false);
 
-  const testimonials = [
-    "Une équipe d'un grand professionnalisme, à l'écoute de nos besoins et toujours disponible pour ajuster les moindres détails. La qualité est au rendez-vous !",
-    "Un investissement qui en valait largement la peine ! Nos clients et partenaires adorent suivre notre évolution grâce à ces vidéos. Merci encore pour ce travail d'orfèvre !",
-    "Le suivi en timelapse est d'une précision remarquable, et les reportages intermédiaires sont un vrai plus pour notre communication interne et externe."
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
+  const videoHTML = `
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      poster="/hero-poster.jpg"
+      class="absolute inset-0 w-full h-full object-cover"
+      style="opacity: 1; transition: opacity 0.3s;"
+    >
+      <source src="/hero-background.mp4" type="video/mp4" />
+    </video>
+  `;
 
   return (
-    <section className="pt-[120px] pb-32 bg-cf-white overflow-hidden relative">
-      <div className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-cf-blue-primary to-transparent top-[80%] animate-[slide_25s_linear_infinite] opacity-10" />
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-zinc-950">
+      {/* Vidéo background */}
+      {!videoError && (
+        <div
+          dangerouslySetInnerHTML={{ __html: videoHTML }}
+          onError={() => setVideoError(true)}
+        />
+      )}
 
-      <div className="container max-w-[1200px] mx-auto px-5">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Content Column */}
-          <div className="mb-12 lg:mb-0">
-            <h1 className="relative text-5xl font-bold text-cf-dark mb-6 leading-tight text-center animate-fade-in-up">
-              <div className="inline-flex flex-col items-center">
-                <span className="inline-block relative transition-all duration-500 z-10">
-                  Immortalisez Votre Chantier
-                </span>
-                <span className="inline-block relative text-cf-blue-primary font-extrabold px-2.5 mt-1.5 bg-gradient-to-r from-transparent via-cf-blue-lightest to-transparent rounded -rotate-1 animate-accent-pulse z-20">
-                  en Vidéo
-                </span>
-              </div>
-            </h1>
-
-            <p className="text-xl text-cf-blue-dark mb-8 leading-relaxed animate-fade-in-up [animation-delay:0.2s]">
-              Capturez chaque détail de votre chantier avec un reportage complet, incluant drone et timelapse, et créez une identité visuelle distincte.
-            </p>
-
-            <ul className="list-none p-0 mb-8">
-              {[
-                'Documentation continue',
-                'Perspectives aériennes spectaculaires',
-                'Suivi détaillé en temps réel'
-              ].map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-center mb-3 text-cf-dark text-base opacity-0 -translate-x-5 animate-fade-in-right"
-                  style={{ animationDelay: `${0.5 + index * 0.2}s`, animationFillMode: 'forwards' }}
-                >
-                  <CheckCircle className="text-cf-blue-primary mr-2.5 w-5 h-5" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-            {/* Testimonial Carousel */}
-            <div className="bg-cf-blue-lightest p-5 rounded-lg mb-10 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in-up [animation-delay:0.3s]">
-              <div className="text-cf-blue-primary text-2xl mb-1">★★★★★</div>
-              <div className="relative overflow-hidden min-h-[80px]">
-                {testimonials.map((text, index) => (
-                  <div
-                    key={index}
-                    className={`absolute w-full transition-all duration-800 ${
-                      currentSlide === index
-                        ? 'opacity-100 translate-y-0 relative'
-                        : 'opacity-0 translate-y-5 absolute'
-                    }`}
-                  >
-                    <p className="text-base italic text-cf-blue-dark mb-0 leading-snug">
-                      "{text}"
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-center mt-2.5">
-                {testimonials.map((_, index) => (
-                  <span
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`h-2 w-2 mx-1.5 rounded-full cursor-pointer transition-all duration-300 ${
-                      currentSlide === index
-                        ? 'bg-cf-blue-primary scale-125'
-                        : 'bg-cf-blue-light'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="text-center lg:text-left">
-              <Link
-                href="/prise-de-rendez-vous/"
-                className="inline-block bg-cf-blue-primary text-cf-white px-8 py-4 text-xl font-semibold rounded-md border-none transition-all duration-300 no-underline shadow-[0_4px_15px_rgba(0,85,255,0.3)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_6px_20px_rgba(0,85,255,0.4)] pulse-animation relative overflow-hidden"
-              >
-                Réservez un Rendez-vous
-              </Link>
-            </div>
-          </div>
-
-          {/* Image Column */}
-          <div className="relative flex justify-center items-center opacity-0 animate-fade-in-up [animation-delay:0.3s] [animation-fill-mode:forwards]">
-            <div className="w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-3xl">
-              <Image
-                src="/asset/01.webp"
-                alt="Suivi de chantier en images – Timelapse et photographie pro"
-                width={600}
-                height={450}
-                className="w-full h-auto transition-transform duration-1500 hover:scale-105"
-                priority
-              />
-            </div>
-
-            {/* Floating Icons */}
-            <div className="hidden lg:block absolute -top-5 right-[20%] bg-cf-blue-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-float">
-              <Aperture className="w-6 h-6" />
-            </div>
-            <div className="hidden lg:block absolute bottom-8 left-[10%] bg-cf-blue-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-float [animation-delay:1s]">
-              <Video className="w-6 h-6" />
-            </div>
-          </div>
+      {/* Fallback image */}
+      {videoError && (
+        <div className="absolute inset-0 bg-zinc-900">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ 
+              backgroundImage: 'url(/hero-poster.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          />
         </div>
+      )}
+
+      {/* Overlay sombre */}
+      <div className="absolute inset-0 bg-black/60" />
+      
+      {/* Dégradé bas */}
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent" />
+
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        {/* 1. LA PUNCHLINE - L'Impact Émotionnel */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight mb-4"
+        >
+          La créativité ne dort jamais
+        </motion.h1>
+
+        {/* 2. LE TITRE SEO */}
+        <motion.h2
+          className="text-xl md:text-2xl text-zinc-300 font-medium mt-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          Production Vidéo, Drone & Stratégie.
+        </motion.h2>
+
+        {/* 3. LE SOUS-TITRE - Discret et Élégant */}
+        <motion.p
+          className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto mt-4 leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <span className="text-zinc-300">Basés dans les Vosges.</span> Nous accompagnons les entreprises et institutions audacieuses.
+        </motion.p>
+
+        {/* 4. CTA Buttons - Harmonisés et Responsive */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 md:mt-10"
+        >
+          <BookingButton variant="default" className="text-sm md:text-base py-3 px-6 md:py-4 md:px-8" />
+          
+          <a
+            href="#portfolio"
+            className="text-sm md:text-base py-3 px-6 md:py-4 md:px-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300 font-medium"
+          >
+            Voir nos réalisations
+          </a>
+        </motion.div>
+
+        {/* Logo Texte */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="mt-16"
+        >
+          <Image
+            src="/logos/nuit-blanche-production-texte.webp"
+            alt="Nuit Blanche Production - Agence Vidéo Vosges"
+            width={192}
+            height={66}
+            className="w-32 md:w-48 h-auto mx-auto opacity-60 hover:opacity-90 transition-opacity duration-300"
+          />
+        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+      >
+        <div className="w-6 h-10 border-2 border-zinc-500 rounded-full flex justify-center">
+          <motion.div
+            className="w-1.5 h-1.5 bg-white rounded-full mt-2"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
