@@ -8,6 +8,7 @@ export default function RendezVousPage() {
     (async function () {
       const cal = await getCalApi({ namespace: 'meeting' });
       cal('ui', {
+        theme: 'light',
         cssVarsPerTheme: {
           light: { 'cal-brand': '#FACC15' },
           dark: { 'cal-brand': '#212125' }
@@ -44,7 +45,7 @@ export default function RendezVousPage() {
                   height: '100%',
                   overflow: 'scroll'
                 }}
-                config={{ layout: 'month_view' }}
+                config={{ layout: 'month_view', theme: 'light' }}
               />
             </div>
           </div>
