@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { CalendarCheck, Mail, Phone, FileText, ShieldCheck, Lock, CheckCircle } from 'lucide-react';
+import { sendEmail } from '@/actions/send-email';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -10,14 +11,57 @@ export function ContactSection() {
     phone: '',
     description: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Client-side validation
     if (!formData.name || !formData.email) {
-      alert('Veuillez remplir les champs obligatoires (Nom et Email)');
+      setSubmitStatus({
+        type: 'error',
+        message: 'Veuillez remplir les champs obligatoires (Nom et Email)'
+      });
       return;
     }
-    alert('Merci pour votre demande ! Nous vous recontacterons sous 48h.');
-    setFormData({ name: '', email: '', phone: '', description: '' });
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const data = new FormData();
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+      data.append('phone', formData.phone);
+      data.append('description', formData.description);
+
+      const result = await sendEmail(data);
+
+      if (result.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Merci pour votre demande ! Nous vous recontacterons sous 48h.'
+        });
+        setFormData({ name: '', email: '', phone: '', description: '' });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: result.error || 'Une erreur est survenue. Veuillez réessayer.'
+        });
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Une erreur est survenue. Veuillez réessayer plus tard.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -25,6 +69,10 @@ export function ContactSection() {
       ...prev,
       [e.target.name]: e.target.value
     }));
+    // Clear error message on input change
+    if (submitStatus.type === 'error') {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
   return (
@@ -100,8 +148,21 @@ export function ContactSection() {
                 </p>
               </div>
 
-              {/* Form Fields */}
-              <div className="space-y-5">
+              {/* Status Messages */}
+              {submitStatus.type && (
+                <div
+                  className={`mb-6 p-4 rounded-lg border ${
+                    submitStatus.type === 'success'
+                      ? 'bg-green-50 border-green-200 text-green-800'
+                      : 'bg-red-50 border-red-200 text-red-800'
+                  }`}
+                >
+                  <p className="text-sm font-medium">{submitStatus.message}</p>
+                </div>
+              )}
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name & Email Row */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -112,7 +173,8 @@ export function ContactSection() {
                       onChange={handleChange}
                       placeholder="*Nom"
                       required
-                      className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -123,7 +185,8 @@ export function ContactSection() {
                       onChange={handleChange}
                       placeholder="*Email"
                       required
-                      className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -136,7 +199,8 @@ export function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Téléphone"
-                    className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -148,7 +212,8 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="Décrivez brièvement votre projet de construction..."
                     rows={4}
-                    className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel resize-none"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   ></textarea>
                 </div>
 
@@ -161,12 +226,35 @@ export function ContactSection() {
 
                 {/* Submit Button */}
                 <button
-                  onClick={handleSubmit}
-                  className="w-full bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold text-lg py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold text-lg py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  Demander un Devis Gratuit
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Envoi en cours...
+                    </span>
+                  ) : (
+                    'Demander un Devis Gratuit'
+                  )}
                 </button>
-              </div>
+              </form>
 
               {/* Trust Badges */}
               <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-chantier-light-grey">
