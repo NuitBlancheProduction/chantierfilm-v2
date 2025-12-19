@@ -7,7 +7,7 @@ const fadeInUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as any }
 };
 
 const services = [
@@ -31,7 +31,7 @@ const services = [
   }
 ];
 
-export default function ServicesSection() {
+export function ServicesSection() {
   return (
     <section className="relative bg-white overflow-hidden">
       {/* Gradient de transition depuis la section précédente */}
@@ -70,7 +70,7 @@ export default function ServicesSection() {
               transition={{ 
                 duration: 0.7, 
                 delay: service.delay,
-                ease: [0.22, 1, 0.36, 1]
+                ease: [0.22, 1, 0.36, 1] as any
               }}
               className="group relative bg-gray-50 border border-gray-200 rounded-xl p-8 hover:border-chantier-yellow hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
