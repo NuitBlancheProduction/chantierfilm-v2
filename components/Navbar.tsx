@@ -22,7 +22,7 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'Accueil' },
     { href: '/prise-de-rendez-vous/', label: 'Planifier un rendez-vous' },
-    { href: '/blog/', label: 'Blog' },
+    { href: '/realisations/', label: 'Nos Réalisations' },
   ];
 
   return (

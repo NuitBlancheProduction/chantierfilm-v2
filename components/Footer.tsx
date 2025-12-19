@@ -91,10 +91,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/blog/"
+                  href="/realisations/"
                   className="hover:text-chantier-yellow transition-colors inline-block"
                 >
-                  Blog
+                  Nos Réalisations
                 </Link>
               </li>
             </ul>

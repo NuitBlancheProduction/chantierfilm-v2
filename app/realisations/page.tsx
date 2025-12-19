@@ -28,7 +28,7 @@ export default function RealisationsPage() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-[#1A1A1A] border-b-4 border-[#FFD700] py-12 px-6"
+        className="bg-[#1A1A1A] border-b-4 border-[#FFD700] py-12 px-6 mt-20"
       >
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
@@ -51,7 +51,7 @@ export default function RealisationsPage() {
           <iframe
             key={currentVideo.id}
             className="absolute inset-0 w-full h-full"
-            src={`https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&rel=0&modestbranding=1`}
+            src={`https://www.youtube.com/embed/${currentVideo.id}?rel=0&modestbranding=1`}
             title={currentVideo.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -82,7 +82,7 @@ export default function RealisationsPage() {
       >
         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
           <span className="w-1 h-6 bg-[#FFD700]"></span>
-          Playlist Complète
+          Sélection de Réalisations
         </h3>
         
         <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-[#FFD700] scrollbar-track-[#1A1A1A]">
@@ -161,7 +161,7 @@ export default function RealisationsPage() {
         </div>
 
         {/* Scroll Hint */}
-        <p className="text-gray-500 text-sm mt-4 text-center md:text-left">
+        <p className="text-gray-500 text-sm mt-4 text-center">
           ← Faites défiler pour voir toutes les réalisations →
         </p>
       </motion.section>
@@ -180,9 +180,12 @@ export default function RealisationsPage() {
           <p className="text-gray-400 mb-8 text-lg">
             Découvrez comment nous pouvons capturer l'essence de vos chantiers
           </p>
-          <button className="bg-[#FFD700] text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#FFC700] transition-all duration-300 hover:scale-105 shadow-lg">
-            Demander un devis
-          </button>
+          <a 
+            href="/rendez-vous"
+            className="inline-block bg-[#FFD700] text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#FFC700] transition-all duration-300 hover:scale-105 shadow-lg"
+          >
+            Prenez un Rendez-vous
+          </a>
         </div>
       </motion.section>
     </div>
