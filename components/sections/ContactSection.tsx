@@ -122,7 +122,7 @@ export function ContactSection() {
 
             <div className="space-y-4">
               <a 
-                href="/prise-de-rendez-vous"
+                href="/rendez-vous"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-chantier-yellow text-chantier-asphalt font-bold text-lg rounded-lg hover:bg-chantier-yellow hover:border-chantier-yellow-dark transition-all duration-300 shadow-lg hover:shadow-xl group"
               >
                 <CalendarCheck className="w-6 h-6 text-chantier-yellow group-hover:text-chantier-asphalt transition-colors" />
