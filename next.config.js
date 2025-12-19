@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export', ← RETIRÉ pour permettre les Server Actions
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'img.youtube.com',
       },
     ],
+  },
+  experimental: {
+    serverActions: {
+      enabled: true,
+    },
   },
 };
 
