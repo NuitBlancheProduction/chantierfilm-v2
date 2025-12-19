@@ -85,7 +85,7 @@ export default function Navbar() {
                 className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105"
               >
                 <Calendar size={18} />
-                <span>Réservez</span>
+                <span>Prendre RDV</span>
               </Link>
             </div>
           </div>
