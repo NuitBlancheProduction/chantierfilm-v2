@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { BookingButton } from '@/components/ui/BookingButton';
+import { Menu, X, Calendar } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,7 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,10 +20,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '/#services', label: 'Services' },
-    { href: '/#portfolio', label: 'Portfolio' },
-    { href: '/#fondateurs', label: 'Le Casting' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/', label: 'Accueil' },
+    { href: '/prise-de-rendez-vous/', label: 'Planifier un rendez-vous' },
+    { href: '/blog/', label: 'Blog' },
   ];
 
   return (
@@ -32,26 +30,42 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800'
-            : 'bg-transparent'
-        } h-24`}
+            ? 'bg-white shadow-industrial'
+            : 'bg-white/95 backdrop-blur-sm'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="flex items-center justify-between h-full">
-            {/* Logo - Icône permanente */}
-            <Link href="/" className="relative group flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            {/* Hamburger Menu - Mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-chantier-light-grey transition-colors"
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? (
+                <X size={24} className="text-chantier-asphalt" />
+              ) : (
+                <Menu size={24} className="text-chantier-asphalt" />
+              )}
+            </button>
+
+            {/* Logo - Centre */}
+            <Link href="/" className="flex-1 flex justify-center md:justify-start">
               <Image
-                src="/logos/logo-nuit-blanche-production-icone.webp"
-                alt="Nuit Blanche Production"
-                width={80}
-                height={80}
-                className="h-16 md:h-20 w-auto object-contain group-hover:opacity-90 transition-opacity"
+                src="/asset/title.webp"
+                alt="Chantier Film - Logo"
+                width={180}
+                height={60}
+                className="h-14 md:h-16 w-auto object-contain hover:opacity-90 transition-opacity"
                 priority
               />
             </Link>
+
+            {/* Spacer - Mobile */}
+            <div className="md:hidden w-10" />
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -59,62 +73,82 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-zinc-300 hover:text-white transition-colors font-medium"
+                  className="text-chantier-asphalt hover:text-chantier-yellow font-semibold text-base transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
-              <BookingButton variant="compact" />
+              
+              {/* CTA Button */}
+              <Link
+                href="/prise-de-rendez-vous/"
+                className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105"
+              >
+                <Calendar size={18} />
+                <span>Réservez</span>
+              </Link>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white p-2 hover:bg-zinc-800 rounded-lg transition-colors"
-              aria-label="Menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu - Plein écran */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 h-screen w-screen z-50 bg-zinc-950/98 backdrop-blur-xl flex flex-col justify-center items-center"
-          >
-            {/* Bouton Fermer en haut à droite */}
-            <button
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-6 right-6 text-white p-2 hover:bg-zinc-800 rounded-lg transition-colors"
-              aria-label="Fermer le menu"
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            />
+            
+            {/* Menu Sidebar */}
+            <motion.div
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white shadow-industrial-lg z-50 md:hidden"
             >
-              <X size={28} />
-            </button>
-
-            {/* Navigation centrée */}
-            <div className="flex flex-col items-center space-y-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
+              <div className="p-6">
+                {/* Close Button */}
+                <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-zinc-300 hover:text-white transition-colors font-medium text-2xl"
+                  className="absolute top-6 right-6 p-2 rounded-lg hover:bg-chantier-light-grey transition-colors"
+                  aria-label="Fermer le menu"
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <div onClick={() => setIsMobileMenuOpen(false)} className="pt-4">
-                <BookingButton variant="default" className="px-8 py-3 text-lg" />
+                  <X size={24} className="text-chantier-asphalt" />
+                </button>
+
+                {/* Menu Items */}
+                <nav className="mt-16 space-y-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-chantier-asphalt hover:text-chantier-yellow hover:bg-chantier-light-grey font-semibold text-lg py-3 px-4 rounded-lg transition-all"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  
+                  {/* CTA Button Mobile */}
+                  <Link
+                    href="/prise-de-rendez-vous/"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-4 rounded-lg shadow-industrial mt-6 transition-all"
+                  >
+                    <Calendar size={20} />
+                    <span>Réservez un Rendez-vous</span>
+                  </Link>
+                </nav>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

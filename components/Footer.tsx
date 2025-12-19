@@ -1,141 +1,111 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { Facebook, Linkedin, Mail } from 'lucide-react';
+import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-zinc-950 border-t border-zinc-900">
+    <footer className="bg-chantier-asphalt text-white border-t-4 border-chantier-yellow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Logo Complet - Centré sur mobile et desktop */}
-          <div className="md:col-span-2 flex flex-col items-center text-center">
-            <Link href="/" className="inline-block mb-4 group">
-              <Image
-                src="/logos/logo-nuit-blanche-production.webp"
-                alt="Nuit Blanche Production"
-                width={384}
-                height={128}
-                className="h-32 w-auto object-contain group-hover:opacity-80 transition-opacity"
-              />
-            </Link>
-            <p className="text-zinc-400 max-w-md">
-              Agence de production audiovisuelle premium. Capturer l'essence.
-              Amplifier l'image.
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Company Info */}
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl font-bold text-chantier-yellow mb-4">
+              CHANTIER FILM
+            </h3>
+            <p className="text-gray-300 mb-4 text-sm">
+              Documentation professionnelle de chantiers par drone et timelapse. 
+              Valorisez vos projets de construction.
             </p>
-            <div className="flex items-center space-x-4 mt-6">
+            
+            {/* Social Links */}
+            <div className="flex justify-center md:justify-start gap-4">
               <a
-                href="https://www.facebook.com/NuitBlancheProduction"
+                href="https://www.linkedin.com/company/chantier-film"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/50366441/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-chantier-yellow transition-all duration-300 group"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="mailto:contact@nuitblancheproduction.com"
-                className="text-zinc-400 hover:text-white transition-colors"
-                aria-label="Email"
-              >
-                <Mail size={20} />
+                <Linkedin className="text-chantier-asphalt group-hover:text-white transition-colors" size={24} />
               </a>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-white font-semibold mb-4">Services</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/#services"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
-                >
-                  Corporate
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#services"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
-                >
-                  Événementiel
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#services"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
-                >
-                  Publicité
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#services"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
-                >
-                  Drone & Technique
-                </Link>
-              </li>
-            </ul>
+          {/* Contact Info */}
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-bold text-chantier-yellow mb-4">
+              Contact
+            </h4>
+            <div className="space-y-3 text-gray-300">
+              <div className="flex items-start gap-3 justify-center md:justify-start">
+                <MapPin className="flex-shrink-0 text-chantier-yellow mt-1" size={20} />
+                <div className="text-sm">
+                  <p>39 rue Jean Mermoz</p>
+                  <p>88190 Golbey, France</p>
+                </div>
+              </div>
+              
+              <a
+                href="tel:+33651301893"
+                className="flex items-center gap-3 hover:text-chantier-yellow transition-colors justify-center md:justify-start"
+              >
+                <Phone className="flex-shrink-0" size={20} />
+                <span className="text-sm">+33 6 51 30 18 93</span>
+              </a>
+              
+              <a
+                href="mailto:contact@chantierfilm.com"
+                className="flex items-center gap-3 hover:text-chantier-yellow transition-colors justify-center md:justify-start"
+              >
+                <Mail className="flex-shrink-0" size={20} />
+                <span className="text-sm">contact@chantierfilm.com</span>
+              </a>
+            </div>
           </div>
 
-          <div>
-            <h3 className="text-white font-semibold mb-4">Entreprise</h3>
-            <ul className="space-y-2">
+          {/* Quick Links */}
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-bold text-chantier-yellow mb-4">
+              Liens Rapides
+            </h4>
+            <ul className="space-y-2 text-gray-300 text-sm">
               <li>
                 <Link
-                  href="/#fondateurs"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                  href="/"
+                  className="hover:text-chantier-yellow transition-colors inline-block"
                 >
-                  Le Casting
+                  Accueil
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#portfolio"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                  href="/prise-de-rendez-vous/"
+                  className="hover:text-chantier-yellow transition-colors inline-block"
                 >
-                  Portfolio
+                  Planifier un rendez-vous
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#contact"
-                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                  href="/blog/"
+                  className="hover:text-chantier-yellow transition-colors inline-block"
                 >
-                  Contact
+                  Blog
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-zinc-500 text-sm">
-            © {currentYear} Nuit Blanche Production. Tous droits réservés.
-          </div>
-          <div>
-            <Link
-              href="/conditions-generales"
-              className="text-zinc-500 hover:text-white transition-colors text-sm"
-            >
-              Conditions Générales de Vente
-            </Link>
-          </div>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-gray-700 text-center">
+          <p className="text-gray-400 text-sm">
+            Copyright © {currentYear} Chantier Film - Marque déposée et exploitée par Nuit Blanche Production
+          </p>
         </div>
       </div>
     </footer>
