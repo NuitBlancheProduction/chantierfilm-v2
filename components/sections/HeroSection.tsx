@@ -41,10 +41,10 @@ export function HeroSection() {
               </span>
             </h1>
 
-            {/* Sous-titre (H2 sémantique déguisé en p) */}
+            {/* Sous-titre : Le compromis SEO/Design */}
             <p className="text-lg sm:text-xl text-chantier-concrete mb-8 leading-relaxed">
-              La solution complète pour le <strong>BTP</strong> : du terrassement à la livraison, 
-              visualisez vos travaux grâce à nos <strong>caméras autonomes</strong> et nos reportages <strong>drone</strong>.
+              La solution de <strong>suivi de chantier</strong>, <strong>timelapse</strong> et <strong>drone</strong> dédiée aux pros du <strong>BTP</strong>. 
+              Visualisez l'avancement de vos travaux et valorisez votre savoir-faire technique.
             </p>
 
             {/* Features List */}
