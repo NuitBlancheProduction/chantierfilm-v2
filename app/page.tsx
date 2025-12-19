@@ -5,6 +5,7 @@ import { ProblemSection } from '@/components/sections/ProblemSection';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { BeforeAfterSection } from '@/components/sections/BeforeAfterSection';
 import { ProcessSection } from '@/components/sections/ProcessSection';
+import { ContactSection } from '@/components/sections/ContactSection';
 
 export default function Home() {
   return (
@@ -18,13 +19,14 @@ export default function Home() {
       {/* Services Section - Notre offre détaillée */}
       <ServicesSection />
       
-      {/* - Section Avant/Après (Comparateur visuel) */}
+      {/* Section Avant/Après (Comparateur visuel) */}
       <BeforeAfterSection />
 
-      {/* - Section Processus (Étapes de collaboration) */}
+      {/* Section Processus (Étapes de collaboration) */}
       <ProcessSection />
       
-      {/* - Section CTA/Contact (Formulaire et conversion) */}
+      {/* Section CTA/Contact (Formulaire et conversion) - LE GRAND FINAL */}
+      <ContactSection />
     </main>
   );
 }
