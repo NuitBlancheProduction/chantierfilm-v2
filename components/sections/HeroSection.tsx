@@ -33,11 +33,11 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-2 lg:order-1"
           >
-            {/* Titre Principal Optimisé SEO & Marketing */}
+            {/* Titre Principal */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-chantier-asphalt leading-tight mb-6">
-              <span className="block">Suivi de Chantier & Timelapse</span>
+              <span className="block">Immortalisez Votre Chantier</span>
               <span className="inline-block mt-2 px-4 py-2 bg-chantier-yellow text-chantier-asphalt rounded-lg transform -rotate-1 shadow-industrial">
-                Immortalisez l'Avancement
+                en Vidéo
               </span>
             </h1>
 
