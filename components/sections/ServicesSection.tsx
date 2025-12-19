@@ -34,9 +34,6 @@ const services = [
 export function ServicesSection() {
   return (
     <section className="relative bg-white overflow-hidden">
-      {/* Gradient de transition depuis la section précédente */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-chantier-asphalt/100 via-chantier-asphalt/30 to-transparent pointer-events-none" />
-
       {/* Éléments décoratifs subtils */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute top-40 left-[10%] w-3 h-3 bg-chantier-yellow rounded-full" />
