@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Film, Video, Cloud } from 'lucide-react';
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.6 }
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
 };
 
 const services = [
@@ -21,37 +21,40 @@ const services = [
     icon: Video,
     title: "Timelapse Professionnel",
     description: "Nos caméras timelapse enregistrent l'évolution de votre chantier en continu, offrant une vision accélérée et détaillée des travaux. Un outil puissant pour suivre les progrès, valoriser votre projet et communiquer efficacement avec vos équipes et clients.",
-    delay: 0.2
+    delay: 0.15
   },
   {
     icon: Cloud,
     title: "Accès à Distance en Temps Réel",
     description: "Surveillez l'évolution de votre chantier où que vous soyez ! Nos systèmes de caméras connectées transmettent en temps réel des images sécurisées accessibles via une plateforme dédiée. Un moyen efficace d'optimiser le suivi du projet et de partager les avancées avec vos partenaires.",
-    delay: 0.4
+    delay: 0.3
   }
 ];
 
-export function ServicesSection() {
+export default function ServicesSection() {
   return (
-    <section className="relative py-20 lg:py-32 bg-gradient-to-b from-chantier-asphalt to-chantier-concrete/20 overflow-hidden">
-      {/* Background decorative dots */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-2 h-2 bg-chantier-yellow rounded-full" />
-        <div className="absolute top-40 right-20 w-2 h-2 bg-chantier-yellow rounded-full" />
-        <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-chantier-yellow rounded-full" />
-        <div className="absolute bottom-20 right-1/3 w-2 h-2 bg-chantier-yellow rounded-full" />
+    <section className="relative bg-white overflow-hidden">
+      {/* Gradient de transition depuis la section précédente */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-chantier-asphalt/100 via-chantier-asphalt/30 to-transparent pointer-events-none" />
+
+      {/* Éléments décoratifs subtils */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute top-40 left-[10%] w-3 h-3 bg-chantier-yellow rounded-full" />
+        <div className="absolute top-[30%] right-[15%] w-2 h-2 bg-chantier-yellow rounded-full" />
+        <div className="absolute bottom-[25%] left-[20%] w-2 h-2 bg-chantier-yellow rounded-full" />
+        <div className="absolute bottom-40 right-[25%] w-3 h-3 bg-chantier-yellow rounded-full" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 py-20 lg:py-32">
         {/* Section Header */}
         <motion.div 
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-16 lg:mb-24"
           {...fadeInUp}
         >
-          <h2 className="text-3xl lg:text-5xl font-bold text-chantier-off-white mb-6">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-chantier-asphalt mb-6 leading-tight">
             Notre <span className="text-chantier-yellow">Offre</span>
           </h2>
-          <p className="text-lg text-chantier-steel/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg lg:text-xl text-chantier-concrete max-w-4xl mx-auto leading-relaxed">
             En choisissant Chantier Film, vous optez pour un partenaire qui valorise chaque détail de votre projet, transformant votre chantier en une histoire visuelle captivante et professionnelle.
           </p>
         </motion.div>
@@ -61,49 +64,56 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: service.delay }}
-              className="group bg-chantier-concrete/40 backdrop-blur-sm border border-chantier-steel/30 rounded-lg p-8 hover:border-chantier-yellow transition-all duration-300 hover:shadow-industrial-lg"
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ 
+                duration: 0.7, 
+                delay: service.delay,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="group relative bg-gray-50 border border-gray-200 rounded-xl p-8 hover:border-chantier-yellow hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
-              {/* Icon */}
+              {/* Barre d'accent au survol */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-chantier-yellow to-chantier-yellow-dark rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Icon Container */}
               <div className="mb-6">
-                <div className="w-16 h-16 rounded-lg bg-chantier-yellow/10 flex items-center justify-center group-hover:bg-chantier-yellow/20 transition-colors">
-                  <service.icon className="w-8 h-8 text-chantier-yellow" />
+                <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-xl bg-chantier-yellow/10 flex items-center justify-center group-hover:bg-chantier-yellow/20 group-hover:scale-110 transition-all duration-500">
+                  <service.icon className="w-8 h-8 lg:w-10 lg:h-10 text-chantier-yellow stroke-[1.5]" />
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-chantier-off-white mb-4 leading-tight">
+              <h3 className="text-xl lg:text-2xl font-bold text-chantier-asphalt mb-4 leading-tight group-hover:text-chantier-yellow-dark transition-colors duration-300">
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-chantier-steel/90 leading-relaxed">
+              <p className="text-chantier-concrete leading-relaxed text-base">
                 {service.description}
               </p>
 
               {/* Bottom accent line */}
-              <div className="mt-6 pt-4 border-t border-chantier-steel/20 group-hover:border-chantier-yellow/30 transition-colors">
-                <div className="w-12 h-1 bg-chantier-yellow/50 group-hover:w-20 transition-all duration-300" />
+              <div className="mt-8 pt-6 border-t border-gray-200 group-hover:border-chantier-yellow/30 transition-colors duration-300">
+                <div className="w-12 h-1 bg-chantier-yellow/40 group-hover:w-24 group-hover:bg-chantier-yellow transition-all duration-500 rounded-full" />
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Optional: Bottom CTA or additional info */}
+        {/* Bottom decorative element */}
         <motion.div
-          className="mt-16 text-center"
+          className="mt-20 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 text-chantier-steel/70 text-sm">
-            <div className="w-12 h-px bg-chantier-yellow/30" />
-            <span>Service clé en main</span>
-            <div className="w-12 h-px bg-chantier-yellow/30" />
+          <div className="inline-flex items-center gap-3 text-chantier-steel text-sm font-medium">
+            <div className="w-16 h-px bg-gradient-to-r from-transparent to-chantier-yellow/40" />
+            <span className="uppercase tracking-wider">Service clé en main</span>
+            <div className="w-16 h-px bg-gradient-to-l from-transparent to-chantier-yellow/40" />
           </div>
         </motion.div>
       </div>
