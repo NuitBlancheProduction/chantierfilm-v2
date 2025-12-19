@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Chantier Film <noreply@chantierfilm.com>',
+      from: 'Chantier Film <onboarding@resend.dev>', // Domaine de test Resend
       to: ['contact@chantierfilm.com'],
       replyTo: email,
       subject: `Nouvelle demande de devis - ${name}`,
