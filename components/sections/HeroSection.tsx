@@ -25,18 +25,9 @@ export function HeroSection() {
   ];
 
   const testimonials = [
-    {
-      text: "Une équipe d'un grand professionnalisme, à l'écoute de nos besoins et toujours disponible pour ajuster les moindres détails. La qualité est au rendez-vous !",
-      author: "Jean-Marc D."
-    },
-    {
-      text: "Un investissement qui en valait largement la peine ! Nos clients et partenaires adorent suivre notre évolution grâce à ces vidéos. Merci encore pour ce travail d'orfèvre !",
-      author: "Sophie L."
-    },
-    {
-      text: "Le suivi en timelapse est d'une précision remarquable, et les reportages intermédiaires sont un vrai plus pour notre communication interne et externe.",
-      author: "Thomas R."
-    }
+    "Une équipe d'un grand professionnalisme, à l'écoute et toujours disponible. La qualité est au rendez-vous !",
+    "Un investissement qui en valait la peine ! Nos clients adorent suivre l'évolution du chantier.",
+    "Le suivi en timelapse est d'une précision remarquable, un vrai plus pour notre communication."
   ];
 
   // Carousel automatique
@@ -130,16 +121,16 @@ export function HeroSection() {
               </Link>
             </motion.div>
 
-            {/* DESKTOP ONLY : Lien Réalisations */}
+            {/* DESKTOP ONLY : Lien Réalisations - CENTRÉ & NOIR */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="hidden lg:block"
+              className="hidden lg:flex lg:justify-center"
             >
               <Link
                 href="/realisations"
-                className="inline-flex items-center gap-2 text-white hover:text-chantier-yellow-light font-semibold text-lg underline decoration-2 underline-offset-4 group transition-all duration-300"
+                className="inline-flex items-center gap-2 text-chantier-asphalt hover:text-chantier-asphalt/80 font-semibold text-lg underline decoration-2 underline-offset-4 group transition-all duration-300"
               >
                 <span>Voir nos réalisations</span>
                 <ArrowRight className="text-chantier-yellow group-hover:translate-x-2 transition-transform duration-300" size={20} />
@@ -225,11 +216,11 @@ export function HeroSection() {
               <span className="relative z-10">Réservez un Rendez-vous</span>
             </Link>
 
-            {/* Lien Réalisations Mobile */}
+            {/* Lien Réalisations Mobile - CENTRÉ & NOIR */}
             <div className="text-center">
               <Link
                 href="/realisations"
-                className="inline-flex items-center gap-2 text-white hover:text-chantier-yellow-light font-semibold text-lg underline decoration-2 underline-offset-4 group transition-all duration-300"
+                className="inline-flex items-center gap-2 text-chantier-asphalt hover:text-chantier-asphalt/80 font-semibold text-lg underline decoration-2 underline-offset-4 group transition-all duration-300"
               >
                 <span>Voir nos réalisations</span>
                 <ArrowRight className="text-chantier-yellow group-hover:translate-x-2 transition-transform duration-300" size={20} />
@@ -237,14 +228,14 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* ORDRE 5 MOBILE : Carousel d'avis | DESKTOP : Colonne Complète en bas */}
+          {/* ORDRE 5 MOBILE : Carousel d'avis | DESKTOP : Centré sous le contenu */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="w-full order-5 lg:col-span-2 lg:order-5"
+            className="w-full order-5 lg:col-span-2 lg:order-5 flex justify-center"
           >
-            <div className="bg-chantier-yellow/10 backdrop-blur-sm p-6 rounded-lg border border-chantier-yellow/20 relative overflow-hidden min-h-[180px]">
+            <div className="w-full max-w-2xl bg-chantier-yellow/10 backdrop-blur-sm p-6 rounded-lg border border-chantier-yellow/20 relative overflow-hidden">
               {/* Étoiles fixes */}
               <div className="flex items-center justify-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
@@ -262,11 +253,8 @@ export function HeroSection() {
                   transition={{ duration: 0.6 }}
                   className="text-center"
                 >
-                  <p className="text-base sm:text-lg text-white italic leading-relaxed mb-3 px-4">
-                    "{testimonials[currentTestimonial].text}"
-                  </p>
-                  <p className="text-chantier-yellow font-bold text-lg">
-                    {testimonials[currentTestimonial].author}
+                  <p className="text-base sm:text-lg text-chantier-asphalt italic leading-relaxed px-4">
+                    "{testimonials[currentTestimonial]}"
                   </p>
                 </motion.div>
               </AnimatePresence>
