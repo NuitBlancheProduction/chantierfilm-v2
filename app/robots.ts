@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://www.nuitblancheproduction.com/sitemap.xml',
+    sitemap: 'https://www.chantierfilm.com/sitemap.xml',
   }
 }

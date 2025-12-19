@@ -1,6 +1,6 @@
 {
-  "name": "Nuit Blanche Production",
-  "short_name": "NB",
+  "name": "Chantier Film",
+  "short_name": "CF",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#FACC15",
+  "background_color": "#212125",
   "display": "standalone"
 }

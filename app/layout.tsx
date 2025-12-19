@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const nunito = Nunito({ 
   subsets: ['latin'],
@@ -121,6 +122,7 @@ export default function RootLayout({
         />
       </head>
       <body className={nunito.className}>
+        <GoogleAnalytics GA_MEASUREMENT_ID="G-S2FE5BSKWT" />
         <Navbar />
         {children}
         <Footer />
