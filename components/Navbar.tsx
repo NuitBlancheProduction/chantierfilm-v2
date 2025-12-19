@@ -55,8 +55,8 @@ export default function Navbar() {
             {/* Logo - Centre */}
             <Link href="/" className="flex-1 flex justify-center md:justify-start">
               <Image
-                src="/logos/logo-chantier-film-texte.webp"
-                alt="Chantier Film - Logo"
+                src="/logos/chantier-film-logo-suivi-video-btp.webp"
+                alt="Logo Chantier Film - Expert en suivi de chantier vidéo, timelapse et drone pour le BTP"
                 width={180}
                 height={60}
                 className="h-14 md:h-16 w-auto object-contain hover:opacity-90 transition-opacity"

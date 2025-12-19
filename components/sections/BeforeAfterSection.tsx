@@ -81,8 +81,8 @@ export function BeforeAfterSection() {
             {/* Image AFTER (Background - Full width) */}
             <div className="absolute inset-0 w-full h-full">
               <Image
-                src="/images/home/comparison/after.webp"
-                alt="État final du chantier - Après travaux"
+                src="/images/home/comparison/suivi-construction-intermediaire-timelapse.webp"
+                alt="État avancé du gros œuvre en cours - Visualisation de l'avancement des travaux par caméra timelapse - Chantier Film"
                 fill
                 className="object-cover"
                 priority
@@ -98,8 +98,8 @@ export function BeforeAfterSection() {
               }}
             >
               <Image
-                src="/images/home/comparison/before.webp"
-                alt="État initial du chantier - Avant travaux"
+                src="/images/home/comparison/installation-chantier-btp-vue-initiale.webp"
+                alt="Début des travaux terrassement et fondations - Installation caméra timelapse solaire Chantier Film"
                 fill
                 className="object-cover"
                 priority

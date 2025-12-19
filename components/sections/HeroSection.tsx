@@ -33,18 +33,18 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-2 lg:order-1"
           >
-            {/* Titre Principal */}
+            {/* Titre Principal Optimisé SEO & Marketing */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-chantier-asphalt leading-tight mb-6">
-              <span className="block">Immortalisez Votre Chantier</span>
+              <span className="block">Suivi de Chantier & Timelapse</span>
               <span className="inline-block mt-2 px-4 py-2 bg-chantier-yellow text-chantier-asphalt rounded-lg transform -rotate-1 shadow-industrial">
-                en Vidéo
+                Immortalisez l'Avancement
               </span>
             </h1>
 
-            {/* Sous-titre */}
+            {/* Sous-titre (H2 sémantique déguisé en p) */}
             <p className="text-lg sm:text-xl text-chantier-concrete mb-8 leading-relaxed">
-              Capturez chaque détail de votre chantier avec un reportage complet, 
-              incluant drone et timelapse, et créez une identité visuelle distincte.
+              La solution complète pour le <strong>BTP</strong> : du terrassement à la livraison, 
+              visualisez vos travaux grâce à nos <strong>caméras autonomes</strong> et nos reportages <strong>drone</strong>.
             </p>
 
             {/* Features List */}
@@ -103,8 +103,8 @@ export function HeroSection() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-industrial-lg hover:shadow-xl transition-all duration-500 group">
               <Image
-                src="/images/home/hero/01.webp"
-                alt="Suivi de chantier en images – Timelapse et photographie pro"
+                src="/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp"
+                alt="Vue panoramique chantier construction gros œuvre - Solution complète suivi audiovisuel et archives vidéo pour entreprises BTP"
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
