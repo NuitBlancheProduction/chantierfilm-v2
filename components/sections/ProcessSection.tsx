@@ -1,13 +1,13 @@
 'use client';
 
-import { Phone, FileCheck, Camera, Video, Gift } from 'lucide-react';
+import { MessageSquare, Building, Camera, Film, CheckCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 interface ProcessStep {
   number: number;
   icon: React.ReactNode;
   title: string;
-  description: string;
+  description: string[];
   isRight?: boolean;
 }
 
@@ -42,37 +42,51 @@ export default function ProcessSection() {
   const steps: ProcessStep[] = [
     {
       number: 1,
-      icon: <Phone className="w-9 h-9" />,
-      title: 'Prise de Contact',
-      description: 'Échangeons sur votre projet, vos besoins spécifiques et vos objectifs de communication visuelle.',
+      icon: <MessageSquare className="w-9 h-9" />,
+      title: 'Consultation Initiale',
+      description: [
+        'Nous débutons par un échange afin de comprendre vos besoins, les spécificités de votre chantier et vos objectifs. Cette première étape permet d\'adapter notre prestation à vos contraintes techniques et à l\'image que vous souhaitez transmettre.'
+      ],
       isRight: false
     },
     {
       number: 2,
-      icon: <FileCheck className="w-9 h-9" />,
-      title: 'Validation du Devis',
-      description: 'Nous établissons une proposition détaillée et personnalisée adaptée à votre budget et planning.',
+      icon: <Building className="w-9 h-9" />,
+      title: 'Installation rapide et optimisée',
+      description: [
+        'Notre équipe planifie l\'installation des caméras de timelapse, et les premières prises d\'images avec nos drones et caméras au sol. Nous obtenons toutes les autorisations nécessaires pour le survol des drones et plaçons les équipements de manière stratégique pour une couverture optimale.',
+        'Installation rapide et efficace, souvent en moins de 48 heures, avec des caméras solaires autonomes pour minimiser les besoins en maintenance.'
+      ],
       isRight: true
     },
     {
       number: 3,
       icon: <Camera className="w-9 h-9" />,
-      title: 'Installation du Matériel',
-      description: 'Mise en place discrète de nos équipements pour un suivi continu sans perturber vos opérations.',
+      title: 'Captation et suivi en temps réel',
+      description: [
+        'Nous capturons en continu les images et vidéos de votre chantier. Nos caméras de timelapse prennent des photos à intervalles réguliers, les drones fournissent des vues aériennes spectaculaires, et les caméras au sol documentent les détails critiques.',
+        'Les données sont transmises en temps réel à un cloud sécurisé, vous permettant de suivre l\'avancement des travaux à distance via notre portail en ligne.'
+      ],
       isRight: false
     },
     {
       number: 4,
-      icon: <Video className="w-9 h-9" />,
-      title: 'Reportages Réguliers',
-      description: 'Captations programmées par drone et au sol selon le rythme défini ensemble pour documenter l\'avancement.',
+      icon: <Film className="w-9 h-9" />,
+      title: 'Montage et Post-Production',
+      description: [
+        'Nous assemblons les séquences capturées pour créer des vidéos de haute qualité qui illustrent clairement l\'évolution de votre chantier. Nous intégrons des éléments graphiques et des annotations selon vos besoins.',
+        'Vous avez un accès illimité aux images capturées et pouvez demander un nombre illimité de modifications de montage pour que le résultat final reflète parfaitement votre vision.'
+      ],
       isRight: true
     },
     {
       number: 5,
-      icon: <Gift className="w-9 h-9" />,
-      title: 'Livraison Finale',
-      description: 'Vous recevez l\'ensemble des médias en haute qualité : timelapse, photos, vidéos montées et fichiers bruts.',
+      icon: <CheckCircle className="w-9 h-9" />,
+      title: 'Livraison et Suivi',
+      description: [
+        'Nous vous remettons un reportage complet, prêt à être utilisé pour vos présentations, votre communication interne et externe, ou encore votre marketing.',
+        'Vous n\'avez à vous soucier de rien : nous gérons tout pour vous. De la planification initiale à la livraison finale, notre équipe s\'occupe de chaque détail, vous permettant de vous concentrer sur la réalisation de votre projet.'
+      ],
       isRight: false
     }
   ];
@@ -87,15 +101,15 @@ export default function ProcessSection() {
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-cf-dark mb-6 leading-tight">
             <span className="inline-block relative transition-all duration-500">
-              Notre
+              Processus de
             </span>{' '}
             <span className="inline-block relative text-cf-blue-primary font-extrabold px-2.5 ml-2 bg-gradient-to-r from-transparent via-cf-blue-lightest to-transparent rounded -rotate-1 animate-accent-pulse">
-              Processus
+              Collaboration
             </span>
             <span className="block w-[60px] h-1 bg-cf-blue-primary mx-auto mt-2 rounded-full" />
           </h2>
           <p className="text-lg lg:text-xl text-cf-blue-dark max-w-[900px] mx-auto leading-relaxed">
-            Un accompagnement sur-mesure en 5 étapes claires pour une collaboration sereine
+            Chez Chantier Film, nous simplifions la gestion de votre projet de construction en prenant en charge l'intégralité du processus de documentation visuelle. Voici comment nous travaillons ensemble :
           </p>
         </div>
 
@@ -129,9 +143,11 @@ export default function ProcessSection() {
                   <h3 className="text-xl lg:text-2xl font-bold text-cf-dark mb-4 pt-2">
                     {step.title}
                   </h3>
-                  <p className="text-base text-cf-blue-dark leading-relaxed">
-                    {step.description}
-                  </p>
+                  {step.description.map((paragraph, pIndex) => (
+                    <p key={pIndex} className="text-base text-cf-blue-dark leading-relaxed mb-3 last:mb-0">
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
 
                 {/* Icon Circle */}
@@ -155,13 +171,8 @@ export default function ProcessSection() {
         <div className={`max-w-[800px] mx-auto mt-12 p-6 bg-cf-blue-lightest rounded-lg border-l-4 border-cf-blue-primary transition-all duration-700 delay-1000 ${
           visibleSteps.length >= steps.length ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
         }`}>
-          <h3 className="text-xl lg:text-2xl font-bold text-cf-dark mb-4 relative inline-block">
-            Un Investissement Durable
-            <span className="absolute bottom-[-5px] left-0 w-10 h-[3px] bg-cf-blue-primary rounded transition-all duration-300" />
-          </h3>
           <p className="text-base lg:text-lg text-cf-blue-dark leading-relaxed font-medium">
-            Au-delà de la simple documentation, vous obtenez un outil de communication puissant 
-            pour valoriser votre savoir-faire et fidéliser vos clients.
+            En collaborant avec Chantier Film, vous bénéficiez d'un service clé en main qui garantit une documentation visuelle précise et professionnelle de votre chantier, renforçant ainsi votre image de marque et facilitant la gestion de votre projet.
           </p>
         </div>
       </div>

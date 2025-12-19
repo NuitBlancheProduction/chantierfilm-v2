@@ -1,6 +1,6 @@
 'use client';
 
-import { Camera, Film, Clock, Video } from 'lucide-react';
+import { Film, Video, Cloud } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 interface Service {
@@ -39,30 +39,26 @@ export default function OfferSection() {
 
   const services: Service[] = [
     {
-      icon: <Camera className="w-8 h-8" />,
-      title: 'Reportages Photo & Vidéo',
-      description: 'Captation professionnelle de chaque étape clé de votre chantier avec des équipements de pointe pour une qualité optimale.'
-    },
-    {
       icon: <Film className="w-8 h-8" />,
-      title: 'Prises de Vues par Drone',
-      description: 'Perspectives aériennes spectaculaires qui révèlent l\'ampleur et la progression de votre projet sous tous les angles.'
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: 'Timelapse Personnalisé',
-      description: 'Condensez des mois de travail en quelques minutes captivantes, parfait pour la communication et les présentations.'
+      title: 'Reportage Complet de Chantier',
+      description: 'Nous réalisons une captation complète de votre projet, du premier coup de pelle jusqu\'à la livraison finale. Grâce à une combinaison de prises de vue au sol, aériennes et en timelapse, nous créons un récit visuel impactant qui met en valeur votre savoir-faire et l\'évolution du chantier.'
     },
     {
       icon: <Video className="w-8 h-8" />,
-      title: 'Montage Professionnel',
-      description: 'Production de vidéos finalisées avec effets, musique et sous-titres, prêtes à être partagées sur tous vos canaux.'
+      title: 'Timelapse Professionnel',
+      description: 'Nos caméras timelapse enregistrent l\'évolution de votre chantier en continu, offrant une vision accélérée et détaillée des travaux. Un outil puissant pour suivre les progrès, valoriser votre projet et communiquer efficacement avec vos équipes et clients.'
+    },
+    {
+      icon: <Cloud className="w-8 h-8" />,
+      title: 'Accès à Distance en Temps Réel',
+      description: 'Surveillez l\'évolution de votre chantier où que vous soyez ! Nos systèmes de caméras connectées transmettent en temps réel des images sécurisées accessibles via une plateforme dédiée. Un moyen efficace d\'optimiser le suivi du projet et de partager les avancées avec vos partenaires.'
     }
   ];
 
   return (
     <section
       ref={sectionRef}
+      id="notre_offre"
       className="py-20 lg:py-24 bg-cf-white relative overflow-hidden"
     >
       {/* Background decorative dots */}
@@ -84,12 +80,12 @@ export default function OfferSection() {
             <span className="absolute w-[60px] h-1 bg-cf-blue-primary bottom-[-10px] left-1/2 -translate-x-1/2 rounded-full" />
           </h2>
           <p className="text-lg lg:text-xl text-cf-blue-dark max-w-[800px] mx-auto leading-relaxed">
-            Une gamme complète de services pour immortaliser chaque moment de votre projet
+            En choisissant Chantier Film, vous optez pour un partenaire qui valorise chaque détail de votre projet, transformant votre chantier en une histoire visuelle captivante et professionnelle.
           </p>
         </div>
 
         {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
           {services.map((service, index) => (
             <div
               key={index}
