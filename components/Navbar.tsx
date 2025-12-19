@@ -55,7 +55,7 @@ export default function Navbar() {
             {/* Logo - Centre */}
             <Link href="/" className="flex-1 flex justify-center md:justify-start">
               <Image
-                src="/asset/title.webp"
+                src="/logos/logo-chantier-film-texte.webp"
                 alt="Chantier Film - Logo"
                 width={180}
                 height={60}

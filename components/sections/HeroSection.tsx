@@ -103,7 +103,7 @@ export function HeroSection() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-industrial-lg hover:shadow-xl transition-all duration-500 group">
               <Image
-                src="/asset/01.webp"
+                src="/images/home/hero/01.webp"
                 alt="Suivi de chantier en images – Timelapse et photographie pro"
                 width={600}
                 height={400}
@@ -153,3 +153,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+
