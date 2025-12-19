@@ -3,8 +3,9 @@ import {
   Container,
   Head,
   Heading,
-  Html,
   Hr,
+  Html,
+  Preview,
   Section,
   Text,
 } from '@react-email/components';
@@ -25,89 +26,54 @@ export default function ContactEmail({
   return (
     <Html>
       <Head />
+      <Preview>Nouvelle demande de devis - {name}</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Header */}
           <Section style={header}>
-            <Heading style={logoText}>CHANTIER FILM</Heading>
+            <Heading style={headerTitle}>Nouveau Lead - Chantier Film</Heading>
+            <div style={yellowBar} />
           </Section>
 
-          {/* Main Content */}
+          {/* Content */}
           <Section style={content}>
-            <Heading style={title}>Nouvelle demande de devis</Heading>
-            <Text style={subtitle}>
-              Une nouvelle demande vient d'être soumise depuis le formulaire de contact.
-            </Text>
+            <Text style={label}>Nom du contact</Text>
+            <Text style={value}>{name}</Text>
 
             <Hr style={divider} />
 
-            {/* Contact Information */}
-            <Section style={infoSection}>
-              <table style={table}>
-                <tbody>
-                  <tr>
-                    <td style={labelCell}>
-                      <Text style={label}>Nom</Text>
-                    </td>
-                    <td style={valueCell}>
-                      <Text style={value}>{name}</Text>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={labelCell}>
-                      <Text style={label}>Email</Text>
-                    </td>
-                    <td style={valueCell}>
-                      <Text style={value}>{email}</Text>
-                    </td>
-                  </tr>
-                  {phone && (
-                    <tr>
-                      <td style={labelCell}>
-                        <Text style={label}>Téléphone</Text>
-                      </td>
-                      <td style={valueCell}>
-                        <Text style={value}>{phone}</Text>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </Section>
+            <Text style={label}>Email</Text>
+            <Text style={value}>{email}</Text>
 
-            {description && (
+            <Hr style={divider} />
+
+            {phone && (
               <>
+                <Text style={label}>Téléphone</Text>
+                <Text style={value}>{phone}</Text>
                 <Hr style={divider} />
-                <Section style={descriptionSection}>
-                  <Text style={label}>Description du projet</Text>
-                  <Text style={descriptionText}>{description}</Text>
-                </Section>
               </>
             )}
 
-            <Hr style={divider} />
-
-            {/* CTA Section */}
-            <Section style={ctaSection}>
-              <Text style={ctaText}>
-                💡 <strong>Action recommandée :</strong> Répondez directement à cet email pour
-                contacter {name}.
-              </Text>
-            </Section>
+            {description && (
+              <>
+                <Text style={label}>Description du projet</Text>
+                <Text style={descriptionValue}>{description}</Text>
+                <Hr style={divider} />
+              </>
+            )}
           </Section>
 
           {/* Footer */}
           <Section style={footer}>
             <Text style={footerText}>
-              Envoyé depuis le site web{' '}
-              <span style={footerBrand}>Chantier Film</span>
+              Envoyé depuis le formulaire de contact du site web chantierfilm.com
             </Text>
             <Text style={footerSubtext}>
               {new Date().toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
                 day: 'numeric',
+                month: 'long',
+                year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
               })}
@@ -121,141 +87,89 @@ export default function ContactEmail({
 
 // Styles
 const main = {
-  backgroundColor: '#f6f6f6',
+  backgroundColor: '#f5f5f5',
   fontFamily:
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 };
 
 const container = {
+  backgroundColor: '#ffffff',
   margin: '0 auto',
-  padding: '20px 0',
+  padding: '0',
   maxWidth: '600px',
+  border: '1px solid #e5e5e5',
 };
 
 const header = {
-  backgroundColor: '#212125',
-  padding: '30px 40px',
-  borderRadius: '8px 8px 0 0',
+  backgroundColor: '#1a1a1a',
+  padding: '32px 40px',
 };
 
-const logoText = {
-  color: '#FACC15',
-  fontSize: '28px',
-  fontWeight: '900',
-  letterSpacing: '2px',
-  margin: '0',
-  textAlign: 'center' as const,
+const headerTitle = {
+  color: '#ffffff',
+  fontSize: '24px',
+  fontWeight: '700',
+  margin: '0 0 12px 0',
+  lineHeight: '1.3',
+};
+
+const yellowBar = {
+  width: '60px',
+  height: '4px',
+  backgroundColor: '#FACC15',
+  borderRadius: '2px',
 };
 
 const content = {
-  backgroundColor: '#ffffff',
   padding: '40px',
-  borderRadius: '0 0 8px 8px',
-};
-
-const title = {
-  color: '#212125',
-  fontSize: '24px',
-  fontWeight: 'bold',
-  margin: '0 0 10px',
-};
-
-const subtitle = {
-  color: '#6b7280',
-  fontSize: '16px',
-  lineHeight: '24px',
-  margin: '0 0 24px',
-};
-
-const divider = {
-  borderColor: '#e5e7eb',
-  margin: '24px 0',
-};
-
-const infoSection = {
-  margin: '20px 0',
-};
-
-const table = {
-  width: '100%',
-  borderCollapse: 'collapse' as const,
-};
-
-const labelCell = {
-  padding: '12px 0',
-  width: '140px',
-  verticalAlign: 'top' as const,
-};
-
-const valueCell = {
-  padding: '12px 0',
-  verticalAlign: 'top' as const,
 };
 
 const label = {
   color: '#6b7280',
-  fontSize: '14px',
+  fontSize: '12px',
   fontWeight: '600',
-  margin: '0',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.5px',
+  margin: '0 0 8px 0',
 };
 
 const value = {
-  color: '#212125',
+  color: '#1a1a1a',
   fontSize: '16px',
-  margin: '0',
   fontWeight: '500',
+  margin: '0 0 24px 0',
+  lineHeight: '1.5',
 };
 
-const descriptionSection = {
-  margin: '20px 0',
-};
-
-const descriptionText = {
-  color: '#212125',
+const descriptionValue = {
+  color: '#1a1a1a',
   fontSize: '15px',
-  lineHeight: '24px',
-  margin: '10px 0 0',
-  padding: '16px',
-  backgroundColor: '#f9fafb',
-  borderLeft: '4px solid #FACC15',
-  borderRadius: '4px',
+  fontWeight: '400',
+  margin: '0 0 24px 0',
+  lineHeight: '1.6',
+  whiteSpace: 'pre-wrap' as const,
 };
 
-const ctaSection = {
-  margin: '20px 0',
-  padding: '20px',
-  backgroundColor: '#fffbeb',
-  borderRadius: '8px',
-  border: '1px solid #fde68a',
-};
-
-const ctaText = {
-  color: '#78350f',
-  fontSize: '14px',
-  margin: '0',
-  lineHeight: '20px',
+const divider = {
+  borderColor: '#e5e5e5',
+  margin: '0 0 24px 0',
 };
 
 const footer = {
-  padding: '20px 40px',
-  textAlign: 'center' as const,
+  backgroundColor: '#f9fafb',
+  padding: '24px 40px',
+  borderTop: '1px solid #e5e5e5',
 };
 
 const footerText = {
   color: '#6b7280',
-  fontSize: '14px',
-  margin: '0',
-};
-
-const footerBrand = {
-  color: '#FACC15',
-  fontWeight: '700',
+  fontSize: '13px',
+  margin: '0 0 8px 0',
+  lineHeight: '1.4',
 };
 
 const footerSubtext = {
   color: '#9ca3af',
   fontSize: '12px',
-  margin: '8px 0 0',
+  margin: '0',
 };

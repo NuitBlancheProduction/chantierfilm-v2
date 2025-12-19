@@ -19,10 +19,21 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email) {
+    // Validation côté client
+    if (!formData.name.trim() || !formData.email.trim()) {
       setSubmitStatus({
         type: 'error',
         message: 'Veuillez remplir les champs obligatoires (Nom et Email)'
+      });
+      return;
+    }
+
+    // Validation email basique côté client
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Veuillez entrer une adresse email valide'
       });
       return;
     }
@@ -41,12 +52,18 @@ export function ContactSection() {
 
       const result = await response.json();
 
-      if (result.success) {
+      if (response.ok && result.success) {
         setSubmitStatus({
           type: 'success',
-          message: 'Merci pour votre demande ! Nous vous recontacterons sous 48h.'
+          message: 'Merci pour votre demande ! Nous vous recontacterons sous 48h ouvrées.'
         });
+        // Reset du formulaire après succès
         setFormData({ name: '', email: '', phone: '', description: '' });
+        
+        // Auto-clear du message de succès après 10 secondes
+        setTimeout(() => {
+          setSubmitStatus({ type: null, message: '' });
+        }, 10000);
       } else {
         setSubmitStatus({
           type: 'error',
@@ -57,7 +74,7 @@ export function ContactSection() {
       console.error('Form submission error:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Une erreur est survenue. Veuillez réessayer plus tard.'
+        message: 'Impossible de contacter le serveur. Vérifiez votre connexion et réessayez.'
       });
     } finally {
       setIsSubmitting(false);
@@ -65,10 +82,14 @@ export function ContactSection() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
+    
+    // Clear error message when user starts typing
     if (submitStatus.type === 'error') {
       setSubmitStatus({ type: null, message: '' });
     }
@@ -142,13 +163,25 @@ export function ContactSection() {
 
               {submitStatus.type && (
                 <div
-                  className={`mb-6 p-4 rounded-lg border ${
+                  className={`mb-6 p-4 rounded-lg border-2 transition-all ${
                     submitStatus.type === 'success'
-                      ? 'bg-green-50 border-green-200 text-green-800'
-                      : 'bg-red-50 border-red-200 text-red-800'
+                      ? 'bg-green-50 border-green-300 text-green-800'
+                      : 'bg-red-50 border-red-300 text-red-800'
                   }`}
+                  role="alert"
                 >
-                  <p className="text-sm font-medium">{submitStatus.message}</p>
+                  <div className="flex items-start gap-3">
+                    {submitStatus.type === 'success' ? (
+                      <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                    ) : (
+                      <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                    <p className="text-sm font-medium leading-relaxed">
+                      {submitStatus.message}
+                    </p>
+                  </div>
                 </div>
               )}
 
@@ -163,6 +196,7 @@ export function ContactSection() {
                       placeholder="*Nom"
                       required
                       disabled={isSubmitting}
+                      maxLength={100}
                       className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
@@ -200,6 +234,7 @@ export function ContactSection() {
                     placeholder="Décrivez brièvement votre projet de construction..."
                     rows={4}
                     disabled={isSubmitting}
+                    maxLength={2000}
                     className="w-full px-4 py-3 bg-gray-50 border border-chantier-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-chantier-yellow focus:border-transparent transition-all text-chantier-asphalt placeholder:text-chantier-steel resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   ></textarea>
                 </div>
