@@ -52,14 +52,14 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Logo - Centre */}
-            <Link href="/" className="flex-1 flex justify-center md:justify-start">
+            {/* Logo - Centre sur mobile, gauche sur desktop */}
+            <Link href="/" className="flex-1 flex justify-center md:justify-start md:flex-none">
               <Image
                 src="/logos/logotype-chantier-film-video-construction.webp"
                 alt="Logo Chantier Film - Expert en suivi de chantier vidéo, timelapse et drone pour le BTP"
-                width={180}
-                height={60}
-                className="h-14 md:h-16 w-auto object-contain hover:opacity-90 transition-opacity"
+                width={220}
+                height={73}
+                className="h-10 md:h-14 lg:h-16 w-auto object-contain hover:opacity-90 transition-opacity"
                 priority
               />
             </Link>
@@ -67,13 +67,13 @@ export default function Navbar() {
             {/* Spacer - Mobile */}
             <div className="md:hidden w-10" />
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Desktop Navigation - Avec espacement généreux */}
+            <div className="hidden md:flex items-center gap-8 lg:gap-10 md:ml-12 lg:ml-16">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-chantier-asphalt hover:text-chantier-yellow font-semibold text-base transition-colors"
+                  className="text-chantier-asphalt hover:text-chantier-yellow font-semibold text-base lg:text-lg transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
               {/* CTA Button */}
               <Link
                 href="/rendez-vous/"
-                className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap"
               >
                 <Calendar size={18} />
                 <span>Demander un Devis</span>
