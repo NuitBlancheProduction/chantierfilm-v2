@@ -39,7 +39,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-20 md:h-24 lg:h-20">
-            {/* Hamburger Menu - Mobile & Desktop */}
+            {/* Hamburger Menu - Mobile & Tablette */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-chantier-light-grey transition-colors"
@@ -52,8 +52,8 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Logo - Centre sur mobile/tablette, gauche sur desktop */}
-            <Link href="/" className="flex-1 md:flex-none flex justify-center md:justify-start lg:flex-1 lg:justify-start">
+            {/* Logo - Centré sur mobile/tablette, gauche sur desktop */}
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:absolute md:left-1/2 md:-translate-x-1/2 lg:static lg:translate-x-0">
               <Image
                 src="/logos/logotype-chantier-film-video-construction.webp"
                 alt="Logo Chantier Film - Expert en suivi de chantier vidéo, timelapse et drone pour le BTP"
@@ -64,21 +64,17 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* CTA Button - Visible sur tablette et desktop */}
+            {/* CTA Button - Tablette uniquement */}
             <Link
               href="/rendez-vous/"
-              className="md:inline-flex hidden items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-4 md:px-5 lg:px-6 py-2.5 md:py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap text-sm md:text-base"
+              className="md:inline-flex lg:hidden hidden items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-5 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap text-sm"
             >
               <Calendar size={18} />
-              <span className="hidden lg:inline">Demander un Devis</span>
-              <span className="lg:hidden">Devis</span>
+              <span>Demandez un RDV</span>
             </Link>
 
-            {/* Spacer - Mobile only */}
-            <div className="md:hidden w-10" />
-
-            {/* Desktop Navigation - Seulement sur lg+ */}
-            <div className="hidden lg:flex items-center gap-8 xl:gap-10 ml-12">
+            {/* Desktop Navigation - lg+ */}
+            <div className="hidden lg:flex items-center gap-8 xl:gap-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -88,6 +84,15 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              
+              {/* CTA Button Desktop */}
+              <Link
+                href="/rendez-vous/"
+                className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap"
+              >
+                <Calendar size={18} />
+                <span>Demander un Devis</span>
+              </Link>
             </div>
           </div>
         </div>
