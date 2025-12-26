@@ -57,29 +57,11 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full order-1 lg:order-1"
           >
-            {/* Titre Principal avec Logo intégré */}
+            {/* Titre Principal */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-chantier-asphalt leading-tight mb-6">
               <span className="block">Immortalisez Votre Chantier</span>
-              <span className="flex items-center gap-4 mt-2">
-                <span className="inline-block px-4 py-2 bg-chantier-yellow text-chantier-asphalt rounded-lg transform -rotate-1 shadow-industrial">
-                  en Vidéo
-                </span>
-                {/* Logo juste après "en Vidéo" */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="flex-shrink-0"
-                >
-                  <Image
-                    src="/logos/icone-chantier-film-camera-connectee-chantier.webp"
-                    alt="Chantier Film"
-                    width={64}
-                    height={64}
-                    className="h-16 w-16"
-                    priority
-                  />
-                </motion.div>
+              <span className="inline-block mt-2 px-4 py-2 bg-chantier-yellow text-chantier-asphalt rounded-lg transform -rotate-1 shadow-industrial">
+                en Vidéo
               </span>
             </h1>
 
@@ -175,6 +157,23 @@ export function HeroSection() {
               {/* Effet grain subtil */}
               <div className="absolute inset-0 bg-gradient-to-t from-chantier-asphalt/5 to-transparent pointer-events-none" />
             </div>
+
+            {/* Logo - Desktop Only - Sous l'image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="hidden lg:flex justify-center mt-6"
+            >
+              <Image
+                src="/logos/icone-chantier-film-camera-connectee-chantier.webp"
+                alt="Chantier Film"
+                width={80}
+                height={80}
+                className="h-20 w-20"
+                priority
+              />
+            </motion.div>
           </motion.div>
 
           {/* ORDRE 3 MOBILE : Features (sous l'image) */}
