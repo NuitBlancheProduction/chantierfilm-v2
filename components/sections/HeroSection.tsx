@@ -57,6 +57,23 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full order-1 lg:order-1"
           >
+            {/* Logo - Sceau d'Autorité */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex justify-center lg:justify-start mb-8"
+            >
+              <Image
+                src="/logos/icone-chantier-film-camera-connectee-chantier.webp"
+                alt="Chantier Film - Icône"
+                width={80}
+                height={80}
+                className="h-20 w-20"
+                priority
+              />
+            </motion.div>
+
             {/* Titre Principal */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-chantier-asphalt leading-tight mb-6">
               <span className="block">Immortalisez Votre Chantier</span>
