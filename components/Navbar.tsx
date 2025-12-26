@@ -37,12 +37,12 @@ export default function Navbar() {
             : 'bg-white/95 backdrop-blur-sm'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Hamburger Menu - Mobile */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between h-20 md:h-24 lg:h-20">
+            {/* Hamburger Menu - Mobile & Desktop */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-chantier-light-grey transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-chantier-light-grey transition-colors"
               aria-label="Menu"
             >
               {isMobileMenuOpen ? (
@@ -52,47 +52,48 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Logo - Centre sur mobile, gauche sur desktop */}
-            <Link href="/" className="flex-1 flex justify-center md:justify-start md:flex-none">
+            {/* Logo - Centre sur mobile/tablette, gauche sur desktop */}
+            <Link href="/" className="flex-1 md:flex-none flex justify-center md:justify-start lg:flex-1 lg:justify-start">
               <Image
                 src="/logos/logotype-chantier-film-video-construction.webp"
                 alt="Logo Chantier Film - Expert en suivi de chantier vidéo, timelapse et drone pour le BTP"
-                width={220}
-                height={73}
-                className="h-10 md:h-14 lg:h-16 w-auto object-contain hover:opacity-90 transition-opacity"
+                width={200}
+                height={66}
+                className="h-9 md:h-12 lg:h-14 w-auto object-contain hover:opacity-90 transition-opacity"
                 priority
               />
             </Link>
 
-            {/* Spacer - Mobile */}
+            {/* CTA Button - Visible sur tablette et desktop */}
+            <Link
+              href="/rendez-vous/"
+              className="md:inline-flex hidden items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-4 md:px-5 lg:px-6 py-2.5 md:py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap text-sm md:text-base"
+            >
+              <Calendar size={18} />
+              <span className="hidden lg:inline">Demander un Devis</span>
+              <span className="lg:hidden">Devis</span>
+            </Link>
+
+            {/* Spacer - Mobile only */}
             <div className="md:hidden w-10" />
 
-            {/* Desktop Navigation - Avec espacement généreux */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-10 md:ml-12 lg:ml-16">
+            {/* Desktop Navigation - Seulement sur lg+ */}
+            <div className="hidden lg:flex items-center gap-8 xl:gap-10 ml-12">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-chantier-asphalt hover:text-chantier-yellow font-semibold text-base lg:text-lg transition-colors whitespace-nowrap"
+                  className="text-chantier-asphalt hover:text-chantier-yellow font-semibold text-base transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
               ))}
-              
-              {/* CTA Button */}
-              <Link
-                href="/rendez-vous/"
-                className="inline-flex items-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-3 rounded-lg shadow-industrial hover:shadow-industrial-lg transition-all duration-300 hover:scale-105 whitespace-nowrap"
-              >
-                <Calendar size={18} />
-                <span>Demander un Devis</span>
-              </Link>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile & Tablet Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -102,7 +103,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             />
             
             {/* Menu Sidebar */}
@@ -111,7 +112,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white shadow-industrial-lg z-50 md:hidden"
+              className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white shadow-industrial-lg z-50 lg:hidden"
             >
               <div className="p-6">
                 {/* Close Button */}
@@ -136,14 +137,14 @@ export default function Navbar() {
                     </Link>
                   ))}
                   
-                  {/* CTA Button Mobile */}
+                  {/* CTA Button dans le menu hamburger */}
                   <Link
                     href="/rendez-vous/"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-2 bg-chantier-yellow hover:bg-chantier-yellow-dark text-chantier-asphalt font-bold px-6 py-4 rounded-lg shadow-industrial mt-6 transition-all"
                   >
                     <Calendar size={20} />
-                    <span>Réservez un Rendez-vous</span>
+                    <span>Demander un Devis</span>
                   </Link>
                 </nav>
               </div>
