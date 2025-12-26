@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     /* Chantier Film - Industrial Theme */
     --background: 252 252 252; /* Off-white pour fond clair */
     --foreground: 33 33 37; /* Noir asphalte pour texte */
