@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     'suivi travaux',
     'Grand Est',
     'Vosges',
+    'Epinal',
   ],
   alternates: {
     canonical: '/',
