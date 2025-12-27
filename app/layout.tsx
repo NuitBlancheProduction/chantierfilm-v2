@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
-import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
@@ -36,6 +35,7 @@ export const metadata: Metadata = {
     'suivi travaux',
     'Grand Est',
     'Vosges',
+    'Epinal',
   ],
   alternates: {
     canonical: '/',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
       'Capturation professionnelle de chantiers avec drone et timelapse. Documentation complète et suivi en temps réel.',
     images: [
       {
-        url: `/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`,
+        url: `/images/chantier-film-suivi-chantier-timelapse-drone-btp-social.jpg`,
         width: 1200,
         height: 630,
         alt: 'Suivi de chantier par drone - Chantier Film',
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: 'Chantier Film - Documentation Professionnelle de Chantiers',
     description:
       'Drone, timelapse et reportages pour valoriser vos projets de construction.',
-    images: [`/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`],
+    images: [`/images/chantier-film-suivi-chantier-timelapse-drone-btp-social.jpg`],
   },
   robots: {
     index: true,
@@ -97,67 +97,90 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLdOrganization = {
+const jsonLdSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Chantier Film',
-  url: baseUrl,
-  logo: `/logos/icone-chantier-film-camera-connectee-chantier.webp`,
-  image: `/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`,
-  description:
-    'Expert en suivi de chantier vidéo, timelapse et drone pour le BTP et l\'industrie. Documentation complète de projets de construction.',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '39 rue Jean Mermoz',
-    addressLocality: 'Golbey',
-    postalCode: '88190',
-    addressRegion: 'Grand Est',
-    addressCountry: 'FR',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: '48.1953',
-    longitude: '6.4347',
-  },
-  areaServed: [
+  '@graph': [
     {
-      '@type': 'Country',
-      name: 'France',
+      '@type': 'WebSite',
+      '@id': `${baseUrl}/#website`,
+      url: baseUrl,
+      name: 'Chantier Film',
+      description:
+        'Documentation vidéo de chantier et suivi drone pour le BTP. Timelapse box 4K, reportages industriels et valorisation de projets de construction.',
+      publisher: {
+        '@id': `${baseUrl}/#organization`,
+      },
+      inLanguage: 'fr-FR',
     },
     {
-      '@type': 'State',
-      name: 'Grand Est',
+      '@type': 'ProfessionalService',
+      '@id': `${baseUrl}/#organization`,
+      name: 'Chantier Film',
+      url: baseUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logos/icone-chantier-film-camera-connectee-chantier.webp`,
+      },
+      image: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`,
+      },
+      description:
+        'Expert en suivi de chantier vidéo, timelapse et drone pour le BTP et l\'industrie. Documentation complète de projets de construction.',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '39 rue Jean Mermoz',
+        addressLocality: 'Golbey',
+        postalCode: '88190',
+        addressRegion: 'Grand Est',
+        addressCountry: 'FR',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 48.1953,
+        longitude: 6.4347,
+      },
+      areaServed: [
+        {
+          '@type': 'Country',
+          name: 'France',
+        },
+        {
+          '@type': 'State',
+          name: 'Grand Est',
+        },
+        {
+          '@type': 'City',
+          name: 'Vosges',
+        },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+33-6-51-30-18-93',
+        contactType: 'customer service',
+        email: 'contact@chantierfilm.com',
+        areaServed: 'FR',
+        availableLanguage: ['French'],
+      },
+      sameAs: [
+        'https://www.linkedin.com/company/chantier-film',
+      ],
+      serviceType: [
+        'Suivi de chantier vidéo',
+        'Timelapse construction',
+        'Captation drone BTP',
+        'Reportage industriel',
+        'Documentation de travaux',
+      ],
+      knowsAbout: [
+        'Construction',
+        'BTP',
+        'Travaux publics',
+        'Architecture',
+        'Génie civil',
+      ],
     },
-    {
-      '@type': 'City',
-      name: 'Vosges',
-    },
-  ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+33-6-51-30-18-93',
-    contactType: 'customer service',
-    email: 'contact@chantierfilm.com',
-    areaServed: 'FR',
-    availableLanguage: ['French'],
-  },
-  sameAs: [
-    'https://www.linkedin.com/company/chantier-film',
-  ],
-  serviceType: [
-    'Suivi de chantier vidéo',
-    'Timelapse construction',
-    'Captation drone BTP',
-    'Reportage industriel',
-    'Documentation de travaux',
-  ],
-  knowsAbout: [
-    'Construction',
-    'BTP',
-    'Travaux publics',
-    'Architecture',
-    'Génie civil',
   ],
 };
 
@@ -168,35 +191,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <head>
-        {/* JSON-LD pour le référencement Local Business */}
-        <Script
-          id="json-ld-organization"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'ProfessionalService',
-              name: 'Chantier Film',
-              url: baseUrl,
-              logo: `${baseUrl}/logos/logo-chantier-film.webp`,
-              image: `${baseUrl}/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`,
-              description: 'Expert en suivi de chantier vidéo, timelapse et drone pour le BTP et l\'industrie.',
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Golbey',
-                addressRegion: 'Grand Est',
-                addressCountry: 'FR',
-              },
-              priceRange: 'Sur devis',
-              telephone: '+33-6-51-30-18-93',
-              email: 'contact@chantierfilm.com',
-              areaServed: 'Grand Est',
-            }),
-          }}
-        />
-      </head>
       <body className={nunito.className}>
+        <script
+          key="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
         <GoogleAnalytics GA_MEASUREMENT_ID="G-S2FE5BSKWT" />
         <Navbar />
         {children}
