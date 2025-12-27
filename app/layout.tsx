@@ -40,11 +40,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  // ✅ CORRECTION 1 : Favicon .ico en premier
   icons: {
     icon: [
+      { url: '/favicons/favicon.ico', sizes: '48x48' },
       { url: '/favicons/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
       { url: '/favicons/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicons/favicon.ico' },
     ],
     shortcut: '/favicons/favicon.ico',
     apple: [
@@ -97,9 +98,11 @@ export const metadata: Metadata = {
   },
 };
 
+// ✅ CORRECTION 3 : Ajout de la WebPage dans le JSON-LD
 const jsonLdSchema = {
   '@context': 'https://schema.org',
   '@graph': [
+    // WebSite
     {
       '@type': 'WebSite',
       '@id': `${baseUrl}/#website`,
@@ -112,6 +115,29 @@ const jsonLdSchema = {
       },
       inLanguage: 'fr-FR',
     },
+    // ✅ NOUVEAU : WebPage pour la page d'accueil
+    {
+      '@type': 'WebPage',
+      '@id': `${baseUrl}/#webpage`,
+      url: baseUrl,
+      name: 'Chantier Film - Immortalisez Votre Chantier en Vidéo',
+      description:
+        'La solution de suivi de chantier, timelapse et drone dédiée aux pros du BTP. Visualisez l\'avancement de vos travaux et valorisez votre savoir-faire technique.',
+      isPartOf: {
+        '@id': `${baseUrl}/#website`,
+      },
+      about: {
+        '@id': `${baseUrl}/#organization`,
+      },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/images/home/hero/suivi-chantier-drone-vue-aerienne-btp-1.webp`,
+        width: 1200,
+        height: 630,
+      },
+      inLanguage: 'fr-FR',
+    },
+    // Organization (ProfessionalService)
     {
       '@type': 'ProfessionalService',
       '@id': `${baseUrl}/#organization`,
