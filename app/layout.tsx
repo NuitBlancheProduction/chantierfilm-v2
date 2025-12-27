@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: 'Chantier Film - Immortalisez Votre Chantier en Vidéo',
   },
   description:
-    'Documentation vidéo de chantier et suivi drone pour le BTP. Timelapse box 4K, reportages industriels et valorisation de projets de construction.',
+    'Transformez vos chantiers en actifs marketing. Suivi Timelapse 4K autonome & Drone pour le BTP. Valorisez votre savoir-faire et rassurez vos investisseurs.',
   keywords: [
     'suivi de chantier',
     'timelapse construction',
@@ -106,7 +106,7 @@ const jsonLdSchema = {
       url: baseUrl,
       name: 'Chantier Film',
       description:
-        'Documentation vidéo de chantier et suivi drone pour le BTP. Timelapse box 4K, reportages industriels et valorisation de projets de construction.',
+        'Transformez vos chantiers en actifs marketing. Suivi Timelapse 4K autonome & Drone pour le BTP. Valorisez votre savoir-faire et rassurez vos investisseurs.',
       publisher: {
         '@id': `${baseUrl}/#organization`,
       },
